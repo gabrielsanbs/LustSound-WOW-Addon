@@ -29,7 +29,7 @@ NS.DB = nil
 -- they are never shared by reference across copies.
 NS.defaultDB = {
     enabled = true,
-    selectedSound = "bolinha_de_gorf.ogg",
+    selectedSound = "faaaahhh_screaming.ogg",
     soundChannel = "Master",
     preventOverlap = true,
     groupOnly = true,

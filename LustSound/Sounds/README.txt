@@ -3,20 +3,20 @@ LustSound - Sounds folder
 
 Place your custom sound file here.
 
-The default expected file is:
+The default bundled sound is:
 
-    lust.ogg
+    faaaahhh_screaming.ogg
 
 MP3 files are also accepted (.mp3).
 
 The path used by the addon (configurable in the options panel) is relative
 to the addon folder, for example:
 
-    Sounds\lust.ogg
+    Sounds\faaaahhh_screaming.ogg
 
 which resolves internally to:
 
-    Interface\AddOns\LustSound\Sounds\lust.ogg
+    Interface\AddOns\LustSound\Sounds\faaaahhh_screaming.ogg
 
 After adding or replacing a file, run /reload in-game so the client can
 pick up the new audio asset.

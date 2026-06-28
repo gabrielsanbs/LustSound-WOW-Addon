@@ -13,8 +13,10 @@ local ADDON_NAME, NS = ...
 -- ============================================================================
 
 NS.CustomSounds = {
+    { "Faaaahhh Screaming", "faaaahhh_screaming.ogg" },
+    { "Screaming Chicken", "Screaming_chicken.ogg" },
     { "Bolinha de gorf", "bolinha_de_gorf.ogg" },
-    {"SILENCE...I KILL YOU", "silence_i_kill_you.ogg"}
+    { "SILENCE...I KILL YOU", "silence_i_kill_you.ogg" },
 
     -- Add more sounds below. Examples:
     -- { "Epic Horn", "epic_horn.ogg" },
