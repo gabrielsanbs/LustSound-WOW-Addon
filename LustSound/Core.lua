@@ -53,6 +53,7 @@ local ANTI_SPAM_INTERVAL = 1.5
 -- hide and then re-show existing exhaustion auras. Treat those reappearing auras
 -- as baseline state instead of a fresh lust cast.
 local AURA_BASELINE_GRACE_SECONDS = 15
+local AURA_START_TIME_FUDGE_SECONDS = 0.5
 
 -- Cache of valid caster GUIDs (player, player pet, group members and their pets).
 -- Stored as a set: guid -> true. Used by group filtering and debug labels.
@@ -65,6 +66,7 @@ local seenExhaustionAuras = {}
 local seededAuraGUIDs = {}
 local auraFallbackTicker = nil
 local auraSeedPending = false
+local auraBaselineStartedAt = 0
 local auraBaselineUntil = 0
 local unitEventFrames = {}
 local debugThrottle = {}
@@ -622,6 +624,25 @@ local function GetAuraSourceUnit(aura)
     return nil
 end
 
+local function AuraStartedDuringBaseline(aura)
+    if type(aura) ~= "table" or auraBaselineStartedAt <= 0 then
+        return false
+    end
+
+    local ok, duration, expirationTime = pcall(function()
+        return aura.duration, aura.expirationTime
+    end)
+    if not ok or type(duration) ~= "number" or type(expirationTime) ~= "number" then
+        return false
+    end
+    if duration <= 0 or expirationTime <= 0 then
+        return false
+    end
+
+    local startTime = expirationTime - duration
+    return startTime >= (auraBaselineStartedAt - AURA_START_TIME_FUDGE_SECONDS)
+end
+
 function NS.FindUnitAuraBySpellID(unitToken, spellID)
     if not unitToken or type(spellID) ~= "number" then
         return nil
@@ -720,7 +741,8 @@ local function ScanUnitExhaustionAuras(unitToken, silent)
         if aura then
             if not seenExhaustionAuras[key] then
                 seenExhaustionAuras[key] = true
-                if not baselineActive and not firstScanForGUID then
+                local freshDuringBaseline = baselineActive and not silent and AuraStartedDuringBaseline(aura)
+                if (not baselineActive and not firstScanForGUID) or freshDuringBaseline then
                     NS.Debug("LustSound [debug]: exhaustion aura found unit=" ..
                         SafeToString(unitToken) .. " debuffID=" .. tostring(debuffID) ..
                         " castSpellID=" .. tostring(castSpellID) ..
@@ -763,6 +785,7 @@ end
 
 local function QueueExhaustionAuraSeed(reason)
     local now = GetTime and GetTime() or 0
+    auraBaselineStartedAt = now
     local baselineUntil = now + AURA_BASELINE_GRACE_SECONDS
     if auraBaselineUntil < baselineUntil then
         auraBaselineUntil = baselineUntil
@@ -823,6 +846,7 @@ function NS.ResetToDefaults()
     -- Reset transient state too.
     lastSoundHandle = nil
     lastActivationTime = 0
+    auraBaselineStartedAt = 0
     auraBaselineUntil = 0
     wipe(seenExhaustionAuras)
     wipe(seededAuraGUIDs)
