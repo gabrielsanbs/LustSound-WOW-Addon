@@ -4,7 +4,7 @@
 ## Notes: Plays a custom sound when a Bloodlust-equivalent ability is used.
 ## Notes-ptBR: Toca um som personalizado quando uma habilidade equivalente a Bloodlust é utilizada.
 ## Author: GBS
-## Version: 1.0.0
+## Version: 1.0.1
 ## SavedVariables: LustSoundDB
 
 Localization.lua
