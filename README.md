@@ -145,6 +145,7 @@ LustSound/
 |-- SoundRegistry.lua   Sound lookup and file path resolution.
 |-- Core.lua            SavedVariables, detection, anti-spam, debug, playback.
 |-- Options.lua         Taint-conscious options panel UI.
+|-- icon.tga            AddOns list icon.
 |-- lustsoundimg.png    Project banner used by the README.
 `-- Sounds/            Bundled example audio files.
 ```

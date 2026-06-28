@@ -5,6 +5,7 @@
 ## Notes-ptBR: Toca um som personalizado quando uma habilidade equivalente a Bloodlust é utilizada.
 ## Author: GBS
 ## Version: 1.0.1
+## IconTexture: Interface\AddOns\LustSound\icon
 ## SavedVariables: LustSoundDB
 
 Localization.lua

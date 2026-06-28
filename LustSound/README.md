@@ -70,6 +70,7 @@ Spells.lua          Spell IDs and debuff mapping.
 SoundRegistry.lua   Sound lookup and path resolution.
 Core.lua            Detection, SavedVariables, playback, debug.
 Options.lua         AddOn options UI.
+icon.tga            AddOns list icon.
 Sounds/             Bundled example audio files.
 ```
 
