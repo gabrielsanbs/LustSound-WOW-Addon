@@ -1,0 +1,15 @@
+## Interface: 120007
+## Title: LustSound
+## Title-ptBR: LustSound
+## Notes: Plays a custom sound when a Bloodlust-equivalent ability is used.
+## Notes-ptBR: Toca um som personalizado quando uma habilidade equivalente a Bloodlust é utilizada.
+## Author: GBS
+## Version: 1.0.0
+## SavedVariables: LustSoundDB
+
+Localization.lua
+Sounds.lua
+Spells.lua
+SoundRegistry.lua
+Core.lua
+Options.lua

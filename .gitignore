@@ -1,0 +1,5 @@
+.agents/
+.codex/
+*.log
+.DS_Store
+Thumbs.db
